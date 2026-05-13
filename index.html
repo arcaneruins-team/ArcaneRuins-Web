@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ArcaneRuins — Coming Soon</title>
+  <meta name="description" content="Unity 6 기반 AR 모바일 게임 ArcaneRuins. 곧 공개됩니다.">
+  <meta property="og:title" content="ArcaneRuins">
+  <meta property="og:description" content="Unity 6 기반 AR 모바일 게임 · Coming Soon">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="title_logo_logo.png">
+  <link rel="icon" href="data:,">
+  <style>
+    :root {
+      --bg: #14121a;
+      --bg-alt: #1d1a26;
+      --fg: #ece6d3;
+      --fg-muted: #8a7e6c;
+      --accent-gold: #c69a4b;
+      --accent-purple: #6b5fb0;
+      --ring: rgba(198, 154, 75, 0.28);
+      --font-sans: system-ui, -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(900px 600px at 50% 28%, var(--bg-alt), var(--bg) 70%);
+      color: var(--fg);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .stack {
+      display: grid;
+      gap: 28px;
+      max-width: 720px;
+      justify-items: center;
+    }
+    .logo {
+      width: min(80vw, 480px);
+      height: auto;
+      filter: drop-shadow(0 8px 32px rgba(107, 95, 176, 0.28));
+    }
+    .tagline {
+      color: var(--fg-muted);
+      font-size: clamp(14px, 2.4vw, 17px);
+      margin: 0;
+      line-height: 1.7;
+      letter-spacing: 0.02em;
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--ring);
+      background: rgba(198, 154, 75, 0.08);
+      color: var(--accent-gold);
+      font-size: 12px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+    .status .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-gold);
+      box-shadow: 0 0 8px var(--accent-gold);
+    }
+    footer {
+      padding: 24px;
+      text-align: center;
+      color: var(--fg-muted);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="stack">
+      <img class="logo" src="title_logo_logo.png" alt="ArcaneRuins / 아케인 루인즈">
+      <p class="tagline">Unity 6 기반 AR 모바일 게임 · 곧 공개됩니다.</p>
+      <div class="status"><span class="dot"></span>Coming Soon</div>
+    </div>
+  </main>
+  <footer>
+    <span>build placeholder</span>
+  </footer>
+</body>
+</html>
