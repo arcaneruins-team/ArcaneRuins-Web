@@ -525,6 +525,28 @@
     @media (max-width: 640px) {
       .world-img-grid, .world-img-grid.cols-3 { grid-template-columns: 1fr; }
     }
+    .world-portrait {
+      margin: 0;
+      display: grid;
+      gap: 8px;
+      justify-items: center;
+    }
+    .world-portrait img {
+      width: 100%;
+      height: auto;
+      max-height: 52vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      background: var(--bg-alt);
+    }
+    .world-portrait figcaption {
+      color: var(--accent-gold);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-align: center;
+      font-weight: 500;
+    }
     .download-btn {
       padding: 14px 28px;
       border-radius: 999px;
@@ -888,6 +910,13 @@
                       <img class="char-image" src="assets/miscs/Mug_Io.jpg" alt="이오 머그컵" loading="lazy">
                     </div>
                   </div>
+                  <div class="goods-group">
+                    <h4 class="goods-label">아크릴 스탠드</h4>
+                    <div class="gallery-grid">
+                      <img class="char-image" src="assets/marina/standing_marina_1.png" alt="마리나 아크릴 스탠드" loading="lazy">
+                      <img class="char-image" src="assets/io/standing_io_1.png" alt="이오 아크릴 스탠드" loading="lazy">
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="secpanel" data-sec-panel="title">
@@ -931,9 +960,18 @@
           <h2>세계를 둘러싼 등장 세력</h2>
 
           <div class="world-img-grid cols-3">
-            <div class="world-img-slot">[이미지: 아멜리아]</div>
-            <div class="world-img-slot">[이미지: 마리나]</div>
-            <div class="world-img-slot">[이미지: 이오]</div>
+            <figure class="world-portrait">
+              <img class="char-image" src="assets/amelia/portrait_Amelia.png" alt="아멜리아 초상화" loading="lazy">
+              <figcaption>아멜리아</figcaption>
+            </figure>
+            <figure class="world-portrait">
+              <img class="char-image" src="assets/marina/portrait_marina.png" alt="마리나 초상화" loading="lazy">
+              <figcaption>마리나</figcaption>
+            </figure>
+            <figure class="world-portrait">
+              <img class="char-image" src="assets/io/portrait_io.png" alt="이오 초상화" loading="lazy">
+              <figcaption>이오</figcaption>
+            </figure>
           </div>
           <p>'가느다란 연결의 마법'을 수호하는 아멜리아 가문을 중심으로 이 세계를 수습하기 위해 영지로 모여드는 마리나, 이오와 같은 매력적인 영웅들이 등장합니다.</p>
 
