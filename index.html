@@ -112,29 +112,84 @@
       background: #000;
       display: block;
     }
-    .unmute-btn {
+    .video-controls {
       position: absolute;
-      bottom: 14px;
-      right: 14px;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
       z-index: 2;
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 10px;
       padding: 8px 14px;
       background: rgba(0, 0, 0, 0.55);
-      color: var(--fg);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 999px;
-      cursor: pointer;
-      font: inherit;
-      font-size: 13px;
-      letter-spacing: 0.04em;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      transition: opacity .25s, background .15s, transform .15s;
+      opacity: 0;
+      transition: opacity .25s;
     }
-    .unmute-btn:hover { background: rgba(0, 0, 0, 0.75); }
-    .unmute-btn.is-hidden { opacity: 0; pointer-events: none; transform: translateY(4px); }
+    .panel[data-panel="teaser"]:hover .video-controls,
+    .video-controls:focus-within,
+    .video-controls.is-shown { opacity: 1; }
+    .vc-btn {
+      background: none;
+      border: none;
+      color: var(--fg);
+      font-size: 14px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      line-height: 1;
+      min-width: 30px;
+      transition: background .15s;
+    }
+    .vc-btn:hover { background: rgba(255, 255, 255, 0.12); }
+    .vc-volume {
+      flex: 1;
+      max-width: 140px;
+      accent-color: var(--accent-gold);
+      cursor: pointer;
+      height: 4px;
+    }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.92);
+      display: none;
+      place-items: center;
+      padding: 5vh 5vw;
+      cursor: zoom-out;
+    }
+    .lightbox.is-open { display: grid; }
+    .lightbox-image {
+      max-width: 100%;
+      max-height: 90vh;
+      display: block;
+      object-fit: contain;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+      cursor: default;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 40px;
+      height: 40px;
+      background: rgba(0, 0, 0, 0.55);
+      color: var(--fg);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background .15s;
+    }
+    .lightbox-close:hover { background: rgba(0, 0, 0, 0.8); }
+    .char-image { cursor: zoom-in; }
     .placeholder {
       color: var(--fg-muted);
       font-size: clamp(18px, 3vw, 28px);
@@ -266,6 +321,58 @@
       font-weight: 500;
     }
     .goods-content .gallery-grid { padding: 4px 0; }
+    .card-flip {
+      position: relative;
+      width: 100%;
+      max-width: 280px;
+      aspect-ratio: 2 / 3;
+      margin: 0 auto;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      background: var(--bg-alt);
+      transition: transform .2s;
+    }
+    .card-flip:hover { transform: scale(1.02); }
+    .card-face {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .45s cubic-bezier(0.5, 0, 0.2, 1);
+    }
+    .card-back { z-index: 2; transform: translateY(0); transition-delay: .35s; }
+    .card-front { z-index: 1; transform: translateY(-100%); transition-delay: 0s; }
+    .card-flip.is-revealed .card-back {
+      transform: translateY(-110%);
+      transition-delay: 0s;
+    }
+    .card-flip.is-revealed .card-front {
+      transform: translateY(0);
+      transition-delay: .35s;
+    }
+    .card-flip::after {
+      content: "터치하여 보기";
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      padding: 4px 10px;
+      background: rgba(0, 0, 0, 0.55);
+      color: var(--fg);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      pointer-events: none;
+      transition: opacity .25s;
+    }
+    .card-flip.is-revealed::after { opacity: 0; }
     .panel[data-panel="character"] {
       align-content: start;
       padding: 18px 16px 20px;
@@ -448,7 +555,7 @@
       <img id="logoBtn" class="logo" src="title_logo_logo.png"
            alt="ArcaneRuins / 아케인 루인즈" role="button" tabindex="0">
       <nav class="tabs" role="tablist" aria-label="섹션 선택">
-        <button class="tab" data-target="character" role="tab" type="button">캐릭터</button>
+        <button class="tab" data-target="character" role="tab" type="button">갤러리</button>
         <span class="tab-sep" aria-hidden="true"></span>
         <button class="tab" data-target="world" role="tab" type="button">세계관</button>
         <span class="tab-sep" aria-hidden="true"></span>
@@ -463,9 +570,11 @@
                poster="title_logo_logo.png">
           티저 영상이 곧 공개됩니다.
         </video>
-        <button class="unmute-btn" id="unmuteBtn" type="button" aria-label="소리 켜기">
-          <span aria-hidden="true">🔈</span><span>소리 켜기</span>
-        </button>
+        <div class="video-controls" id="videoControls">
+          <button class="vc-btn" id="vcPlay" type="button" aria-label="재생/일시정지">▶</button>
+          <button class="vc-btn" id="vcMute" type="button" aria-label="음소거 전환">🔇</button>
+          <input class="vc-volume" id="vcVolume" type="range" min="0" max="1" step="0.01" value="1" aria-label="볼륨">
+        </div>
       </article>
 
       <article class="panel" data-panel="character">
@@ -473,7 +582,7 @@
           <button class="subnav-tab is-active" data-char="marina" type="button">마리나</button>
           <button class="subnav-tab" data-char="io" type="button">이오</button>
           <button class="subnav-tab" data-char="amelia" type="button">아멜리아</button>
-          <button class="subnav-tab" data-char="dungeon" type="button">던전 속 위험</button>
+          <button class="subnav-tab" data-char="sprites" type="button">인게임 스프라이트</button>
           <button class="subnav-tab" data-char="misc" type="button">기타</button>
         </nav>
 
@@ -482,7 +591,6 @@
             <div class="sectabs" role="tablist" aria-label="마리나 섹션">
               <button class="sectab is-active" data-sec="illust" type="button">일러스트</button>
               <button class="sectab" data-sec="art" type="button">원화</button>
-              <button class="sectab" data-sec="sprite" type="button">인게임 스프라이트</button>
               <button class="sectab" data-sec="model3d" type="button">3D 모델</button>
               <button class="sectab" data-sec="process" type="button">작업과정</button>
               <button class="sectab" data-sec="bg" type="button">배경 설정</button>
@@ -507,7 +615,6 @@
                   <img class="char-image" src="assets/marina/Concept%20Art.jpg" alt="마리나 원화" loading="lazy">
                 </div>
               </div>
-              <div class="secpanel" data-sec-panel="sprite"><div class="placeholder small">마리나 인게임 스프라이트 — Coming Soon</div></div>
               <div class="secpanel model-panel" data-sec-panel="model3d">
                 <model-viewer id="marinaModel"
                               src="assets/models/Marina_Model.glb"
@@ -558,7 +665,6 @@
             <div class="sectabs" role="tablist" aria-label="이오 섹션">
               <button class="sectab is-active" data-sec="illust" type="button">일러스트</button>
               <button class="sectab" data-sec="art" type="button">원화</button>
-              <button class="sectab" data-sec="sprite" type="button">인게임 스프라이트</button>
               <button class="sectab" data-sec="model3d" type="button">3D 모델</button>
               <button class="sectab" data-sec="process" type="button">작업과정</button>
               <button class="sectab" data-sec="bg" type="button">배경 설정</button>
@@ -583,7 +689,6 @@
                   <img class="char-image" src="assets/io/Concept%20Art.png" alt="이오 원화" loading="lazy">
                 </div>
               </div>
-              <div class="secpanel" data-sec-panel="sprite"><div class="placeholder small">이오 인게임 스프라이트 — Coming Soon</div></div>
               <div class="secpanel model-panel" data-sec-panel="model3d">
                 <model-viewer id="ioModel"
                               src="assets/models/Io_Model.glb"
@@ -675,14 +780,75 @@
             </div>
           </section>
 
-          <section class="char-panel" data-char-panel="dungeon">
-            <div class="sectabs" role="tablist" aria-label="던전 속 위험 섹션">
-              <button class="sectab is-active" data-sec="sprite" type="button">인게임 스프라이트</button>
-              <button class="sectab" data-sec="process" type="button">작업 과정</button>
+          <section class="char-panel" data-char-panel="sprites">
+            <div class="sectabs" role="tablist" aria-label="인게임 스프라이트 — 캐릭터 선택">
+              <button class="sectab is-active" data-sec="marina" type="button">마리나</button>
+              <button class="sectab" data-sec="io" type="button">이오</button>
+              <button class="sectab" data-sec="dungeon" type="button">던전 속 위험</button>
             </div>
             <div class="secstage">
-              <div class="secpanel is-active" data-sec-panel="sprite"><div class="placeholder small">던전 속 위험 — 인게임 스프라이트 — Coming Soon</div></div>
-              <div class="secpanel" data-sec-panel="process"><div class="placeholder small">던전 속 위험 — 작업 과정 — Coming Soon</div></div>
+              <div class="secpanel is-active" data-sec-panel="marina">
+                <div class="char-image-wrap">
+                  <img class="char-image" src="assets/marina/marina_idle_1.png" alt="마리나 인게임 스프라이트" loading="lazy">
+                </div>
+              </div>
+              <div class="secpanel" data-sec-panel="io">
+                <div class="char-image-wrap">
+                  <img class="char-image" src="assets/io/io_idle_1.png" alt="이오 인게임 스프라이트" loading="lazy">
+                </div>
+              </div>
+              <div class="secpanel" data-sec-panel="dungeon">
+                <div class="goods-content">
+                  <div class="goods-group">
+                    <h4 class="goods-label">망령선장</h4>
+                    <div class="gallery-grid">
+                      <img class="char-image" src="assets/monsters/GhostCaptain_Sprite.png" alt="망령선장 스프라이트" loading="lazy">
+                      <img class="char-image" src="assets/monsters/GhostCaptain_ConceptArt.PNG" alt="망령선장 컨셉 아트" loading="lazy">
+                    </div>
+                  </div>
+                  <div class="goods-group">
+                    <h4 class="goods-label">유령선원</h4>
+                    <div class="gallery-grid">
+                      <img class="char-image" src="assets/monsters/GhostCrew_Sword_Sprite.png" alt="유령선원 (검) 스프라이트" loading="lazy">
+                      <img class="char-image" src="assets/monsters/GhostCrew_Gun_Sprite.png" alt="유령선원 (총) 스프라이트" loading="lazy">
+                    </div>
+                  </div>
+                  <div class="goods-group">
+                    <h4 class="goods-label">세이렌</h4>
+                    <div class="gallery-grid">
+                      <img class="char-image" src="assets/monsters/Siren_Sprite.png" alt="세이렌 스프라이트" loading="lazy">
+                    </div>
+                  </div>
+                  <div class="goods-group">
+                    <h4 class="goods-label">레비아탄</h4>
+                    <div class="gallery-grid">
+                      <img class="char-image" src="assets/monsters/Leviathan_idle.png" alt="레비아탄 스프라이트" loading="lazy">
+                    </div>
+                  </div>
+                  <div class="goods-group">
+                    <h4 class="goods-label">레비아탄 — 작업 과정</h4>
+                    <div class="gallery-grid">
+                      <img class="char-image" src="assets/monsters/Leviathan_Rough%20sketch.jpg" alt="레비아탄 러프 스케치" loading="lazy">
+                      <img class="char-image" src="assets/monsters/Leviathan_Line%20drawing.jpg" alt="레비아탄 라인 드로잉" loading="lazy">
+                      <img class="char-image" src="assets/monsters/Leviathan_Design.jpg" alt="레비아탄 디자인" loading="lazy">
+                      <img class="char-image" src="assets/monsters/Leviathan_Coloring.jpg" alt="레비아탄 컬러링" loading="lazy">
+                    </div>
+                  </div>
+                  <div class="goods-group">
+                    <h4 class="goods-label">슬라임 &amp; 갯민숭달팽이</h4>
+                    <div class="gallery-grid">
+                      <img class="char-image" src="assets/monsters/slime_idle.png" alt="슬라임 스프라이트" loading="lazy">
+                      <img class="char-image" src="assets/monsters/nudibranch_idle.png" alt="갯민숭달팽이 스프라이트" loading="lazy">
+                    </div>
+                  </div>
+                  <div class="goods-group">
+                    <h4 class="goods-label">슬라임 &amp; 갯민숭달팽이 — 파츠</h4>
+                    <div class="gallery-grid">
+                      <img class="char-image" src="assets/monsters/Silme%26Nudibranch_Parts.png" alt="슬라임 &amp; 갯민숭달팽이 파츠" loading="lazy">
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -690,6 +856,7 @@
             <div class="sectabs" role="tablist" aria-label="기타 섹션">
               <button class="sectab is-active" data-sec="goods" type="button">굿즈</button>
               <button class="sectab" data-sec="title" type="button">타이틀 일러스트</button>
+              <button class="sectab" data-sec="charprocess" type="button">캐릭터 작업 과정</button>
             </div>
             <div class="secstage">
               <div class="secpanel is-active" data-sec-panel="goods">
@@ -697,9 +864,14 @@
                   <div class="goods-group">
                     <h4 class="goods-label">카드</h4>
                     <div class="gallery-grid">
-                      <img class="char-image" src="assets/miscs/Card_Marina.png" alt="마리나 카드" loading="lazy">
-                      <img class="char-image" src="assets/miscs/Card_Io.png" alt="이오 카드" loading="lazy">
-                      <img class="char-image" src="assets/miscs/Card_Back.png" alt="카드 뒷면" loading="lazy">
+                      <div class="card-flip" data-card="marina">
+                        <img class="card-face card-back" src="assets/miscs/Card_Back.png" alt="카드 뒷면" loading="lazy">
+                        <img class="card-face card-front" src="assets/miscs/Card_Marina.png" alt="마리나 카드 (앞면)" loading="lazy">
+                      </div>
+                      <div class="card-flip" data-card="io">
+                        <img class="card-face card-back" src="assets/miscs/Card_Back.png" alt="카드 뒷면" loading="lazy">
+                        <img class="card-face card-front" src="assets/miscs/Card_Io.png" alt="이오 카드 (앞면)" loading="lazy">
+                      </div>
                     </div>
                   </div>
                   <div class="goods-group">
@@ -721,6 +893,22 @@
               <div class="secpanel" data-sec-panel="title">
                 <div class="char-image-wrap">
                   <img class="char-image" src="assets/miscs/Title.jpg" alt="ArcaneRuins 타이틀 일러스트" loading="lazy">
+                </div>
+              </div>
+              <div class="secpanel" data-sec-panel="charprocess">
+                <div class="goods-content">
+                  <div class="goods-group">
+                    <h4 class="goods-label">라인 드로잉</h4>
+                    <div class="gallery-grid">
+                      <img class="char-image" src="assets/miscs/Characters_Line.png" alt="캐릭터 라인 드로잉" loading="lazy">
+                    </div>
+                  </div>
+                  <div class="goods-group">
+                    <h4 class="goods-label">컬러링</h4>
+                    <div class="gallery-grid">
+                      <img class="char-image" src="assets/miscs/Characters_Coloring.png" alt="캐릭터 컬러링" loading="lazy">
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -772,6 +960,10 @@
   <footer>
     <span>build placeholder</span>
   </footer>
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="닫기">✕</button>
+    <img class="lightbox-image" id="lightboxImage" alt="">
+  </div>
   <script>
     (function () {
       var tabs = document.querySelectorAll('.tab');
@@ -867,17 +1059,77 @@
         }
       });
 
-      // 티저 영상 소리 켜기 (브라우저 자동재생 정책 우회: 사용자 인터랙션 필요)
-      var unmuteBtn = document.getElementById('unmuteBtn');
-      if (unmuteBtn) {
-        unmuteBtn.addEventListener('click', function () {
-          video.muted = false;
-          video.volume = 1;
+      // 영상 컨트롤 바: 재생/일시정지, 음소거, 볼륨
+      var vcPlay = document.getElementById('vcPlay');
+      var vcMute = document.getElementById('vcMute');
+      var vcVolume = document.getElementById('vcVolume');
+      function updatePlayBtn() { vcPlay.textContent = video.paused ? '▶' : '⏸'; }
+      function updateMuteBtn() {
+        vcMute.textContent = (video.muted || video.volume === 0) ? '🔇' : '🔈';
+      }
+      vcPlay.addEventListener('click', function () {
+        if (video.paused) {
           var p = video.play();
           if (p && typeof p.catch === 'function') p.catch(function () {});
-          unmuteBtn.classList.add('is-hidden');
+        } else {
+          video.pause();
+        }
+      });
+      vcMute.addEventListener('click', function () {
+        video.muted = !video.muted;
+        if (!video.muted && video.volume === 0) {
+          video.volume = 1;
+          vcVolume.value = '1';
+        }
+        updateMuteBtn();
+      });
+      vcVolume.addEventListener('input', function () {
+        video.volume = parseFloat(vcVolume.value);
+        if (video.volume > 0) video.muted = false;
+        updateMuteBtn();
+      });
+      video.addEventListener('play', updatePlayBtn);
+      video.addEventListener('pause', updatePlayBtn);
+      video.addEventListener('volumechange', updateMuteBtn);
+      updatePlayBtn();
+      updateMuteBtn();
+
+      // 카드 플립: 뒷면 클릭 시 위로 슬라이드 → 앞면이 위에서 내려옴 (토글)
+      document.querySelectorAll('.card-flip').forEach(function (card) {
+        card.addEventListener('click', function () {
+          card.classList.toggle('is-revealed');
         });
+      });
+
+      // 라이트박스: 이미지 클릭 시 확대 보기
+      var lightbox = document.getElementById('lightbox');
+      var lbImg = document.getElementById('lightboxImage');
+      var lbClose = document.getElementById('lightboxClose');
+      function openLightbox(src, alt) {
+        lbImg.src = src;
+        lbImg.alt = alt || '';
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
       }
+      function closeLightbox() {
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        lbImg.src = '';
+        document.body.style.overflow = '';
+      }
+      document.querySelectorAll('.char-image').forEach(function (img) {
+        img.addEventListener('click', function () {
+          openLightbox(img.src, img.alt);
+        });
+      });
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+      lbClose.addEventListener('click', closeLightbox);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+      });
 
       // 3D 모델 진단: 로드 완료 시 사용 가능한 애니메이션 클립명 출력
       ['marinaModel', 'ioModel'].forEach(function (id) {
