@@ -101,7 +101,6 @@
     }
     .panel.is-active { display: grid; }
     .panel[data-panel="teaser"].is-active,
-    .panel[data-panel="world"].is-active,
     .panel[data-panel="download"].is-active {
       place-items: center;
     }
@@ -145,6 +144,128 @@
       font-size: clamp(14px, 2vw, 18px);
       letter-spacing: 0.08em;
     }
+    .char-bg-text {
+      max-width: 720px;
+      display: grid;
+      gap: 18px;
+      padding: 8px 4px;
+    }
+    .char-profile {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      font-size: clamp(13px, 1.5vw, 15px);
+      background: rgba(198, 154, 75, 0.04);
+      border: 1px solid var(--ring);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .char-profile th, .char-profile td {
+      padding: 9px 16px;
+      border-bottom: 1px solid rgba(198, 154, 75, 0.18);
+      text-align: left;
+    }
+    .char-profile tr:last-child th,
+    .char-profile tr:last-child td { border-bottom: none; }
+    .char-profile th {
+      color: var(--accent-gold);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      width: 32%;
+      white-space: nowrap;
+      background: rgba(198, 154, 75, 0.06);
+    }
+    .char-profile td { color: var(--fg); }
+    .char-bg-text p {
+      margin: 0;
+      font-size: clamp(14px, 1.6vw, 16px);
+      line-height: 1.95;
+      color: var(--fg);
+      letter-spacing: 0.02em;
+      text-align: left;
+    }
+    .char-link {
+      background: none;
+      border: none;
+      padding: 0;
+      font: inherit;
+      color: var(--accent-gold);
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-color: rgba(198, 154, 75, 0.35);
+      text-underline-offset: 2px;
+      transition: text-decoration-color .15s, color .15s;
+    }
+    .char-link:hover {
+      text-decoration-color: var(--accent-gold);
+      color: #d6ad60;
+    }
+    .emotion-gallery {
+      display: grid;
+      gap: 14px;
+      padding: 12px;
+      width: 100%;
+      justify-items: center;
+    }
+    .emotion-main {
+      display: grid;
+      place-items: center;
+      width: 100%;
+    }
+    .emotion-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .emotion-tab {
+      background: rgba(198, 154, 75, 0.06);
+      border: 1px solid var(--ring);
+      color: var(--fg);
+      font: inherit;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      padding: 5px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background .15s, color .15s, border-color .15s;
+    }
+    .emotion-tab:hover { background: rgba(198, 154, 75, 0.14); }
+    .emotion-tab.is-active {
+      background: var(--accent-gold);
+      color: var(--bg);
+      border-color: var(--accent-gold);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      padding: 12px;
+      width: 100%;
+    }
+    .gallery-grid .char-image {
+      width: 100%;
+      height: auto;
+      max-height: 45vh;
+      object-fit: contain;
+    }
+    .goods-content {
+      display: grid;
+      gap: 24px;
+      padding: 16px 12px;
+      width: 100%;
+    }
+    .goods-group { display: grid; gap: 8px; }
+    .goods-label {
+      margin: 0;
+      text-align: center;
+      font-size: clamp(14px, 1.8vw, 16px);
+      color: var(--accent-gold);
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+    .goods-content .gallery-grid { padding: 4px 0; }
     .panel[data-panel="character"] {
       align-content: start;
       padding: 18px 16px 20px;
@@ -222,6 +343,81 @@
       background: linear-gradient(180deg, #1d1a26 0%, #14121a 100%);
       --poster-color: transparent;
     }
+    .char-image-wrap {
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      width: 100%;
+    }
+    .char-image {
+      max-width: 100%;
+      max-height: 70vh;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      display: block;
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      padding: 12px;
+      width: 100%;
+    }
+    .process-grid .char-image {
+      width: 100%;
+      height: auto;
+      max-height: 50vh;
+      object-fit: contain;
+    }
+    .panel[data-panel="world"] {
+      align-content: start;
+      padding: 28px 22px;
+      gap: 36px;
+    }
+    .world-section { display: grid; gap: 18px; }
+    .world-section h2 {
+      margin: 0;
+      font-size: clamp(18px, 2.4vw, 22px);
+      color: var(--accent-gold);
+      letter-spacing: 0.1em;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--ring);
+      text-align: center;
+      font-weight: 600;
+    }
+    .world-section p {
+      margin: 0;
+      font-size: clamp(14px, 1.6vw, 16px);
+      line-height: 1.85;
+      color: var(--fg);
+      letter-spacing: 0.02em;
+      text-align: center;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .world-img-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .world-img-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .world-img-slot {
+      aspect-ratio: 4 / 3;
+      display: grid;
+      place-items: center;
+      background: rgba(198, 154, 75, 0.04);
+      border: 1px dashed var(--ring);
+      border-radius: 8px;
+      color: var(--fg-muted);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-align: center;
+      padding: 8px;
+    }
+    @media (max-width: 640px) {
+      .world-img-grid, .world-img-grid.cols-3 { grid-template-columns: 1fr; }
+    }
     .download-btn {
       padding: 14px 28px;
       border-radius: 999px;
@@ -278,6 +474,7 @@
           <button class="subnav-tab" data-char="io" type="button">이오</button>
           <button class="subnav-tab" data-char="amelia" type="button">아멜리아</button>
           <button class="subnav-tab" data-char="dungeon" type="button">던전 속 위험</button>
+          <button class="subnav-tab" data-char="misc" type="button">기타</button>
         </nav>
 
         <div class="char-stage">
@@ -291,8 +488,25 @@
               <button class="sectab" data-sec="bg" type="button">배경 설정</button>
             </div>
             <div class="secstage">
-              <div class="secpanel is-active" data-sec-panel="illust"><div class="placeholder small">마리나 일러스트 — Coming Soon</div></div>
-              <div class="secpanel" data-sec-panel="art"><div class="placeholder small">마리나 원화 — Coming Soon</div></div>
+              <div class="secpanel is-active" data-sec-panel="illust">
+                <div class="emotion-gallery" data-char-prefix="marina" data-name="marina">
+                  <div class="emotion-main">
+                    <img class="char-image emotion-current" src="assets/marina/standing_marina_1.png" alt="마리나 일러스트 (보통)" loading="lazy">
+                  </div>
+                  <div class="emotion-tabs" role="tablist" aria-label="마리나 감정 선택">
+                    <button class="emotion-tab is-active" data-emo="1" type="button">보통</button>
+                    <button class="emotion-tab" data-emo="2" type="button">기쁨</button>
+                    <button class="emotion-tab" data-emo="3" type="button">놀람</button>
+                    <button class="emotion-tab" data-emo="4" type="button">부끄러움</button>
+                    <button class="emotion-tab" data-emo="5" type="button">화남</button>
+                  </div>
+                </div>
+              </div>
+              <div class="secpanel" data-sec-panel="art">
+                <div class="char-image-wrap">
+                  <img class="char-image" src="assets/marina/Concept%20Art.jpg" alt="마리나 원화" loading="lazy">
+                </div>
+              </div>
               <div class="secpanel" data-sec-panel="sprite"><div class="placeholder small">마리나 인게임 스프라이트 — Coming Soon</div></div>
               <div class="secpanel model-panel" data-sec-panel="model3d">
                 <model-viewer id="marinaModel"
@@ -303,8 +517,40 @@
                               class="char-model"
                               alt="마리나 3D 모델"></model-viewer>
               </div>
-              <div class="secpanel" data-sec-panel="process"><div class="placeholder small">마리나 작업과정 — Coming Soon</div></div>
-              <div class="secpanel" data-sec-panel="bg"><div class="placeholder small">마리나 배경 설정 — Coming Soon</div></div>
+              <div class="secpanel" data-sec-panel="process">
+                <div class="process-grid">
+                  <img class="char-image" src="assets/marina/3way_1.jpg" alt="마리나 3면도 1" loading="lazy">
+                  <img class="char-image" src="assets/marina/3way_2.jpg" alt="마리나 3면도 2" loading="lazy">
+                  <img class="char-image" src="assets/marina/3way_3.jpg" alt="마리나 3면도 3" loading="lazy">
+                </div>
+              </div>
+              <div class="secpanel" data-sec-panel="bg">
+                <div class="char-bg-text">
+                  <table class="char-profile">
+                    <tbody>
+                      <tr><th>이름</th><td>마리나 발레리오스</td></tr>
+                      <tr><th>성별</th><td>여</td></tr>
+                      <tr><th>종족</th><td>인간</td></tr>
+                      <tr><th>나이</th><td>22</td></tr>
+                    </tbody>
+                  </table>
+                  <p>대분열 이후 물리적으로 고립된 영지, '무너져가는 마을'. 22살의 성기사 마리나 발레리오스는 영주 아멜리아를 지키는 호위대장입니다. 은빛 하프 플레이트 갑옷과 자기 몸통만 한 거대한 방패를 든 그녀는 누구보다 우직하고 신념이 강하며 책임감이 투철합니다.</p>
+
+                  <p>하지만 그녀의 굳건한 겉모습 속에는 깊은 무력감이 자리 잡고 있습니다. 마을을 습격하는 크리처들과 영지를 노리는 외부 세력의 위협 속에서, 미지의 '차원문'이 뿜어내는 압도적인 현상 앞에 자신의 검과 방패가 너무나도 초라하게 느껴졌기 때문입니다.</p>
+
+                  <p>어느 날, 마리나는 차원문의 이상 현상을 조사하기 위해 그녀의 소중한 소꿉친구인 <button type="button" class="char-link" data-jump-char="io">이오</button>와 함께 정찰을 나섭니다. 그러나 미궁의 환경은 가혹했고, 예기치 못한 현상으로 인해 진퇴양난의 위기에 빠집니다.</p>
+
+                  <p>그들의 앞을 가로막은 것은 거대한 보스. 마리나가 아무리 방패를 쥐고 버텨도 보스의 압도적인 방어력과 힘 앞에서는 역부족이었고, 파티는 전멸할 위기에 처하고 맙니다. 그녀가 지키고자 했던 모든 것(이오와 영지의 미래)이 무너지려던 그 찰나의 절망적인 순간.</p>
+
+                  <p>바로 그때, 현실 세계에서 접속한 '유저'의 존재가 마리나와 연결됩니다. 절망하던 마리나의 귓가에, 혹은 의식 속에 유저의 정확한 타격 지시가 내려꽂힙니다.</p>
+
+                  <p>마리나는 본능적으로 그 지휘에 따랐고, 혼신의 일격으로 보스를 쓰러뜨리는 데 성공합니다. 원리원칙을 따지는 융통성 없는 성격임에도 불구하고, 생사의 갈림길에서 자신들을 구원한 이 미지의 존재(유저)에 대해 그녀는 의심 대신 확고한 신뢰를 품게 됩니다.</p>
+
+                  <p>구사일생으로 영지에 복귀한 마리나는 자신이 지켜야 할 주군, <button type="button" class="char-link" data-jump-char="amelia">아멜리아</button>에게 유저를 적극적으로 천거합니다. 이때부터 마리나는 플레이어의 든든한 초기 탱커 자산이자, 방어와 어그로 끌기 등 본연의 임무를 묵묵히 수행하는 파티의 최전선 고기방패... 아니, 수호 방패가 됩니다.</p>
+
+                  <p>평소에는 농담을 다큐로 받아들여 파티원들의 장난에 곧잘 휘둘리며 부끄러워하지만, 전투에 돌입하여 플레이어의 지휘가 떨어지는 순간, 그녀는 아멜리아와 플레이어를 향한 맹목적인 충성심으로 어떤 끔찍한 몬스터 앞에서도 결코 물러서지 않습니다. 아멜리아를 지키고 영지를 재건한다는 그녀의 단기 목표는 이제 플레이어의 지휘 아래 현실이 되어가기 시작합니다.</p>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -318,8 +564,25 @@
               <button class="sectab" data-sec="bg" type="button">배경 설정</button>
             </div>
             <div class="secstage">
-              <div class="secpanel is-active" data-sec-panel="illust"><div class="placeholder small">이오 일러스트 — Coming Soon</div></div>
-              <div class="secpanel" data-sec-panel="art"><div class="placeholder small">이오 원화 — Coming Soon</div></div>
+              <div class="secpanel is-active" data-sec-panel="illust">
+                <div class="emotion-gallery" data-char-prefix="io" data-name="io">
+                  <div class="emotion-main">
+                    <img class="char-image emotion-current" src="assets/io/standing_io_1.png" alt="이오 일러스트 (보통)" loading="lazy">
+                  </div>
+                  <div class="emotion-tabs" role="tablist" aria-label="이오 감정 선택">
+                    <button class="emotion-tab is-active" data-emo="1" type="button">보통</button>
+                    <button class="emotion-tab" data-emo="2" type="button">기쁨</button>
+                    <button class="emotion-tab" data-emo="3" type="button">놀람</button>
+                    <button class="emotion-tab" data-emo="4" type="button">부끄러움</button>
+                    <button class="emotion-tab" data-emo="5" type="button">화남</button>
+                  </div>
+                </div>
+              </div>
+              <div class="secpanel" data-sec-panel="art">
+                <div class="char-image-wrap">
+                  <img class="char-image" src="assets/io/Concept%20Art.png" alt="이오 원화" loading="lazy">
+                </div>
+              </div>
               <div class="secpanel" data-sec-panel="sprite"><div class="placeholder small">이오 인게임 스프라이트 — Coming Soon</div></div>
               <div class="secpanel model-panel" data-sec-panel="model3d">
                 <model-viewer id="ioModel"
@@ -330,21 +593,85 @@
                               class="char-model"
                               alt="이오 3D 모델"></model-viewer>
               </div>
-              <div class="secpanel" data-sec-panel="process"><div class="placeholder small">이오 작업과정 — Coming Soon</div></div>
-              <div class="secpanel" data-sec-panel="bg"><div class="placeholder small">이오 배경 설정 — Coming Soon</div></div>
+              <div class="secpanel" data-sec-panel="process">
+                <div class="process-grid">
+                  <img class="char-image" src="assets/io/3way_1.jpg" alt="이오 3면도 1" loading="lazy">
+                  <img class="char-image" src="assets/io/3way_2.jpg" alt="이오 3면도 2" loading="lazy">
+                </div>
+              </div>
+              <div class="secpanel" data-sec-panel="bg">
+                <div class="char-bg-text">
+                  <table class="char-profile">
+                    <tbody>
+                      <tr><th>이름</th><td>이오 닉스</td></tr>
+                      <tr><th>성별</th><td>여</td></tr>
+                      <tr><th>종족</th><td>인간</td></tr>
+                      <tr><th>나이</th><td>21</td></tr>
+                    </tbody>
+                  </table>
+                  <p>나이 21살, 무너져가는 마을의 뒷골목을 주름잡는(?) 정보상이자 도적인 이오 닉스. 그녀의 목표는 오직 하나, 돈을 잔뜩 벌어서 자기만의 번듯한 가게를 여는 것입니다 (비록 사업 아이템은 아직 못 정했지만...).</p>
+
+                  <p>하지만 현실은 밀린 빚과 팍팍한 생존 위협의 연속입니다. 돈이 궁했던 이오는 결국 영주의 딸 <button type="button" class="char-link" data-jump-char="amelia">아멜리아</button>가 제안한 위험천만한 의뢰를 수락하고, 정찰대의 길잡이 자격으로 차원문 근처로 향하게 됩니다.</p>
+
+                  <p>정찰 도중, 눈치 빠르고 상황 판단력이 좋은 이오는 차원문 근처에서 이상현상을 가장 먼저 감지합니다. 그녀의 기회주의적 본능은 당장 "도망쳐!"라고 외치고 있었죠.</p>
+
+                  <p>하지만 그녀의 소꿉친구인 <button type="button" class="char-link" data-jump-char="marina">마리나</button>의 고지식함 때문에 도망칠 타이밍을 놓치고, 결국 압도적인 위용의 보스와 강제로 교전하게 됩니다. 평소에도 마리나의 고지식함을 틱틱대며 놀리던 이오였지만, 이번만큼은 진짜로 목숨이 날아갈 판이었습니다.</p>
+
+                  <p>이오는 마리나의 거대한 방패 뒤에 숨어 민첩하게 틈을 노렸습니다. 하지만 가죽과 얇은 천 활동복 차림의 그녀가 던진 단검은 보스의 피부에 전혀 박히지 않았습니다. 죽음을 각오하고 평소의 해맑은 표정 대신 무서운 정색을 지으려던 찰나!</p>
+
+                  <p>갑자기 나타난 정체불명의 인물(유저)이 치명적인 약점을 노출시킵니다. 처음엔 유저를 '마력도 없는 약골'이라며 속으로 무시했던 이오였지만, 유저의 소름 돋는 시야와 전술적 지시가 떨어지자 망설임 없이 보스의 약점을 정확히 찔러버립니다.</p>
+
+                  <p>강적을 쓰러뜨린 직후, 이오의 머릿속 계산기가 미친 듯이 돌아갑니다.<br><em>"이 녀석 옆에 붙어있으면 떼돈을 벌거나 최소한 죽진 않겠다!"</em></p>
+
+                  <p>미지의 인물이 가진 특수성에서 진한 돈 냄새를 맡은 이오는 스스로 유저의 '전속 스카우트'를 자처하며 파티에 합류합니다. 튜토리얼 이후 그녀는 파티의 핵심 공격수로 참여하게 됩니다. 타인을 잘 믿지 않으려는 그녀의 방어기제와, 파티에서 서서히 느끼게 되는 묘한 소속감 사이에서 이오의 내적 갈등과 성장이 본격적으로 시작됩니다.</p>
+                </div>
+              </div>
             </div>
           </section>
 
           <section class="char-panel" data-char-panel="amelia">
             <div class="sectabs" role="tablist" aria-label="아멜리아 섹션">
               <button class="sectab is-active" data-sec="illust" type="button">일러스트</button>
-              <button class="sectab" data-sec="art" type="button">원화</button>
               <button class="sectab" data-sec="bg" type="button">배경 설정</button>
             </div>
             <div class="secstage">
-              <div class="secpanel is-active" data-sec-panel="illust"><div class="placeholder small">아멜리아 일러스트 — Coming Soon</div></div>
-              <div class="secpanel" data-sec-panel="art"><div class="placeholder small">아멜리아 원화 — Coming Soon</div></div>
-              <div class="secpanel" data-sec-panel="bg"><div class="placeholder small">아멜리아 배경 설정 — Coming Soon</div></div>
+              <div class="secpanel is-active" data-sec-panel="illust">
+                <div class="emotion-gallery" data-char-prefix="amelia" data-name="Amelia">
+                  <div class="emotion-main">
+                    <img class="char-image emotion-current" src="assets/amelia/standing_Amelia_1.png" alt="아멜리아 일러스트 (보통)" loading="lazy">
+                  </div>
+                  <div class="emotion-tabs" role="tablist" aria-label="아멜리아 감정 선택">
+                    <button class="emotion-tab is-active" data-emo="1" type="button">보통</button>
+                    <button class="emotion-tab" data-emo="2" type="button">기쁨</button>
+                    <button class="emotion-tab" data-emo="3" type="button">놀람</button>
+                    <button class="emotion-tab" data-emo="4" type="button">부끄러움</button>
+                    <button class="emotion-tab" data-emo="5" type="button">화남</button>
+                  </div>
+                </div>
+              </div>
+              <div class="secpanel" data-sec-panel="bg">
+                <div class="char-bg-text">
+                  <table class="char-profile">
+                    <tbody>
+                      <tr><th>이름</th><td>아멜리아</td></tr>
+                      <tr><th>성별</th><td>여</td></tr>
+                      <tr><th>종족</th><td>인간</td></tr>
+                      <tr><th>나이</th><td>18</td></tr>
+                    </tbody>
+                  </table>
+                  <p>이상 현상에 의해 과거의 영광을 잃고 몰락해 가는 영지를 홀로 지키고 있는 어린 영주 대리, 아멜리아.</p>
+
+                  <p>그녀는 부모님이 남긴 막대한 빚과 떠나가는 영지민들 사이에서, 겉으로는 꼿꼿하게 귀족의 자존심을 내세우지만 매일 밤 텅 빈 금고와 장부를 보며 남몰래 눈물짓는 나날을 보내고 있습니다.</p>
+
+                  <p>수 개월간의 시간이 흐르고. 그녀는 영지의 몰락 원인이 던전에 있을 거라 판단해 그녀의 충실한 심복을 던전으로 보내기로 합니다.</p>
+
+                  <p>그녀의 충실한 기사, <button type="button" class="char-link" data-jump-char="marina">마리나</button>와 그 기사의 친우 <button type="button" class="char-link" data-jump-char="io">이오</button>를 보낸 최초의 던전 탐사, 예상 이상으로 강력한 적에 의해 그녀들을 잃어버릴 위기에서, '유저'와 만나게 됩니다.</p>
+
+                  <p>그녀들을 구원할 이 책사, '유저'는, 훌륭한 지휘 능력으로 파티를 전멸 위기에서 구하고, 점차 영지에 활기를 가져다 줄 희망으로. 그녀의 눈에 비치기 시작합니다.</p>
+
+                  <p>이 작은 소녀는 유저에게 영주로서의 책임감과 개인적인 감정을 느끼며 영지의 더 나아질 미래를 향해 나아가기로 합니다.</p>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -358,11 +685,79 @@
               <div class="secpanel" data-sec-panel="process"><div class="placeholder small">던전 속 위험 — 작업 과정 — Coming Soon</div></div>
             </div>
           </section>
+
+          <section class="char-panel" data-char-panel="misc">
+            <div class="sectabs" role="tablist" aria-label="기타 섹션">
+              <button class="sectab is-active" data-sec="goods" type="button">굿즈</button>
+              <button class="sectab" data-sec="title" type="button">타이틀 일러스트</button>
+            </div>
+            <div class="secstage">
+              <div class="secpanel is-active" data-sec-panel="goods">
+                <div class="goods-content">
+                  <div class="goods-group">
+                    <h4 class="goods-label">카드</h4>
+                    <div class="gallery-grid">
+                      <img class="char-image" src="assets/miscs/Card_Marina.png" alt="마리나 카드" loading="lazy">
+                      <img class="char-image" src="assets/miscs/Card_Io.png" alt="이오 카드" loading="lazy">
+                      <img class="char-image" src="assets/miscs/Card_Back.png" alt="카드 뒷면" loading="lazy">
+                    </div>
+                  </div>
+                  <div class="goods-group">
+                    <h4 class="goods-label">키링</h4>
+                    <div class="gallery-grid">
+                      <img class="char-image" src="assets/miscs/Keyring_Marina.png" alt="마리나 키링" loading="lazy">
+                      <img class="char-image" src="assets/miscs/Keyring_Io.png" alt="이오 키링" loading="lazy">
+                    </div>
+                  </div>
+                  <div class="goods-group">
+                    <h4 class="goods-label">머그컵</h4>
+                    <div class="gallery-grid">
+                      <img class="char-image" src="assets/miscs/Mug_Marina.jpg" alt="마리나 머그컵" loading="lazy">
+                      <img class="char-image" src="assets/miscs/Mug_Io.jpg" alt="이오 머그컵" loading="lazy">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="secpanel" data-sec-panel="title">
+                <div class="char-image-wrap">
+                  <img class="char-image" src="assets/miscs/Title.jpg" alt="ArcaneRuins 타이틀 일러스트" loading="lazy">
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </article>
 
       <article class="panel" data-panel="world">
-        <div class="placeholder">세계관 — Coming Soon</div>
+        <section class="world-section">
+          <h2>산산조각 난 세계와 희망의 씨앗</h2>
+
+          <p>과거 대전쟁 이후 전쟁을 겪은 사람들의 미움, 혐오 등 부정적 감정이 '부정한 감정의 신'으로 발현되어 세계를 산산조각 내버렸습니다.</p>
+
+          <p>'지역 방호 마법'을 미리 펼쳐둔 영지들은 비교적 양호한 상태로 살아남을 수 있었지만, 다른 지역들은 '부정한 감정의 신'의 마법으로 인해 서로 단절되고 고립된 상태에 놓여 있습니다.</p>
+
+          <p>부정한 감정의 신이 있다면 그에 맞서는 긍정적인 감정의 신도 존재합니다. 대전쟁의 상흔으로 인해 그 힘은 약해졌지만, 그의 권능을 이어받은 마법을 통해 세계를 다시 이어 붙이려는 자들도 존재합니다.</p>
+        </section>
+
+        <section class="world-section">
+          <h2>세계를 둘러싼 등장 세력</h2>
+
+          <div class="world-img-grid cols-3">
+            <div class="world-img-slot">[이미지: 아멜리아]</div>
+            <div class="world-img-slot">[이미지: 마리나]</div>
+            <div class="world-img-slot">[이미지: 이오]</div>
+          </div>
+          <p>'가느다란 연결의 마법'을 수호하는 아멜리아 가문을 중심으로 이 세계를 수습하기 위해 영지로 모여드는 마리나, 이오와 같은 매력적인 영웅들이 등장합니다.</p>
+
+          <p>찢어진 세계를 이용해 사익을 취하려는 '메인 빌런(과거 제국의 황제, 대마법사, 타락한 영주 등)'이 영웅들의 앞길을 가로막습니다.</p>
+        </section>
+
+        <section class="world-section">
+          <h2>당신은..</h2>
+          <p>이 여정을 함께할 플레이어입니다.<br>'희미해진 사랑의 신'이 현실에 흩뿌린 매개체에 공명한 당신은 이 세계를 구원할 조력자로서 선택받았습니다.</p>
+          <p>지속적인 탐험을 통해 영웅들을 성장시키고, 폐허가 된 영지를 재건해주세요.</p>
+          <p>찢어진 공간의 주인을 처치하여 고립되어 있는 사람들을 연결하고, 세계의 상처를 온전히 치유해주세요.</p>
+        </section>
       </article>
 
       <article class="panel" data-panel="download">
@@ -429,6 +824,36 @@
           });
           scope.querySelectorAll('[data-sec-panel]').forEach(function (p) {
             p.classList.toggle('is-active', p.dataset.secPanel === key);
+          });
+        });
+      });
+
+      // 본문 내 캐릭터 인라인 링크 (예: [이오], [아멜리아]) → 해당 서브탭으로 점프
+      document.querySelectorAll('.char-link').forEach(function (link) {
+        link.addEventListener('click', function () {
+          var target = link.dataset.jumpChar;
+          var btn = document.querySelector('[data-char="' + target + '"]');
+          if (btn) btn.click();
+        });
+      });
+
+      // 감정 갤러리: 보통/기쁨/놀람/부끄러움/화남 버튼 클릭 시 메인 이미지 스왑
+      // 파일명 규약: assets/{dir}/standing_{name}_{1-5}.png
+      // dir(폴더명)과 name(파일 토큰)이 케이스가 다를 수 있어 별도 속성으로 분리
+      document.querySelectorAll('.emotion-gallery').forEach(function (gallery) {
+        var prefix = gallery.dataset.charPrefix;
+        var name = gallery.dataset.name || prefix;
+        var img = gallery.querySelector('.emotion-current');
+        var tabs = gallery.querySelectorAll('.emotion-tab');
+        var labels = { '1': '보통', '2': '기쁨', '3': '놀람', '4': '부끄러움', '5': '화남' };
+        tabs.forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            var emo = tab.dataset.emo;
+            img.src = 'assets/' + prefix + '/standing_' + name + '_' + emo + '.png';
+            img.alt = prefix + ' 일러스트 (' + (labels[emo] || '') + ')';
+            tabs.forEach(function (t) {
+              t.classList.toggle('is-active', t === tab);
+            });
           });
         });
       });
