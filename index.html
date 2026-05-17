@@ -86,7 +86,6 @@
     }
     .stage {
       width: min(92vw, 880px);
-      aspect-ratio: 16 / 9;
       background: var(--bg-alt);
       border: 1px solid var(--ring);
       border-radius: 12px;
@@ -96,22 +95,97 @@
     .panel {
       grid-area: 1 / 1;
       display: none;
-      place-items: center;
       width: 100%;
-      height: 100%;
+      min-height: min(50vw, 480px);
     }
     .panel.is-active { display: grid; }
+    .panel[data-panel="teaser"].is-active,
+    .panel[data-panel="world"].is-active,
+    .panel[data-panel="download"].is-active {
+      place-items: center;
+    }
     .teaser-video {
       width: 100%;
-      height: 100%;
+      aspect-ratio: 16 / 9;
       object-fit: cover;
       background: #000;
+      display: block;
     }
     .placeholder {
       color: var(--fg-muted);
       font-size: clamp(18px, 3vw, 28px);
       letter-spacing: 0.12em;
     }
+    .placeholder.small {
+      font-size: clamp(14px, 2vw, 18px);
+      letter-spacing: 0.08em;
+    }
+    .panel[data-panel="character"] {
+      align-content: start;
+      padding: 18px 16px 20px;
+      gap: 14px;
+    }
+    .subnav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+    .subnav-tab {
+      background: rgba(198, 154, 75, 0.06);
+      border: 1px solid var(--ring);
+      color: var(--fg);
+      font: inherit;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background .15s, color .15s, border-color .15s;
+    }
+    .subnav-tab:hover { background: rgba(198, 154, 75, 0.14); }
+    .subnav-tab.is-active {
+      background: var(--accent-gold);
+      color: var(--bg);
+      border-color: var(--accent-gold);
+    }
+    .char-stage { display: grid; }
+    .char-panel { grid-area: 1 / 1; display: none; gap: 12px; }
+    .char-panel.is-active { display: grid; }
+    .sectabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--ring);
+    }
+    .sectab {
+      background: none;
+      border: none;
+      color: var(--fg-muted);
+      font: inherit;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      padding: 4px 2px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+    .sectab:hover { color: var(--fg); }
+    .sectab.is-active {
+      color: var(--accent-gold);
+      border-bottom-color: var(--accent-gold);
+    }
+    .secstage { display: grid; }
+    .secpanel {
+      grid-area: 1 / 1;
+      display: none;
+      place-items: center;
+      min-height: 160px;
+      padding: 16px;
+    }
+    .secpanel.is-active { display: grid; }
     .download-btn {
       padding: 14px 28px;
       border-radius: 999px;
@@ -160,7 +234,72 @@
       </article>
 
       <article class="panel" data-panel="character">
-        <div class="placeholder">캐릭터 — Coming Soon</div>
+        <nav class="subnav" role="tablist" aria-label="캐릭터 선택">
+          <button class="subnav-tab is-active" data-char="marina" type="button">마리나</button>
+          <button class="subnav-tab" data-char="io" type="button">이오</button>
+          <button class="subnav-tab" data-char="amelia" type="button">아멜리아</button>
+          <button class="subnav-tab" data-char="dungeon" type="button">던전 속 위험</button>
+        </nav>
+
+        <div class="char-stage">
+          <section class="char-panel is-active" data-char-panel="marina">
+            <div class="sectabs" role="tablist" aria-label="마리나 섹션">
+              <button class="sectab is-active" data-sec="illust" type="button">일러스트</button>
+              <button class="sectab" data-sec="art" type="button">원화</button>
+              <button class="sectab" data-sec="sprite" type="button">인게임 스프라이트</button>
+              <button class="sectab" data-sec="process" type="button">작업과정</button>
+              <button class="sectab" data-sec="bg" type="button">배경 설정</button>
+            </div>
+            <div class="secstage">
+              <div class="secpanel is-active" data-sec-panel="illust"><div class="placeholder small">마리나 일러스트 — Coming Soon</div></div>
+              <div class="secpanel" data-sec-panel="art"><div class="placeholder small">마리나 원화 — Coming Soon</div></div>
+              <div class="secpanel" data-sec-panel="sprite"><div class="placeholder small">마리나 인게임 스프라이트 — Coming Soon</div></div>
+              <div class="secpanel" data-sec-panel="process"><div class="placeholder small">마리나 작업과정 — Coming Soon</div></div>
+              <div class="secpanel" data-sec-panel="bg"><div class="placeholder small">마리나 배경 설정 — Coming Soon</div></div>
+            </div>
+          </section>
+
+          <section class="char-panel" data-char-panel="io">
+            <div class="sectabs" role="tablist" aria-label="이오 섹션">
+              <button class="sectab is-active" data-sec="illust" type="button">일러스트</button>
+              <button class="sectab" data-sec="art" type="button">원화</button>
+              <button class="sectab" data-sec="sprite" type="button">인게임 스프라이트</button>
+              <button class="sectab" data-sec="process" type="button">작업과정</button>
+              <button class="sectab" data-sec="bg" type="button">배경 설정</button>
+            </div>
+            <div class="secstage">
+              <div class="secpanel is-active" data-sec-panel="illust"><div class="placeholder small">이오 일러스트 — Coming Soon</div></div>
+              <div class="secpanel" data-sec-panel="art"><div class="placeholder small">이오 원화 — Coming Soon</div></div>
+              <div class="secpanel" data-sec-panel="sprite"><div class="placeholder small">이오 인게임 스프라이트 — Coming Soon</div></div>
+              <div class="secpanel" data-sec-panel="process"><div class="placeholder small">이오 작업과정 — Coming Soon</div></div>
+              <div class="secpanel" data-sec-panel="bg"><div class="placeholder small">이오 배경 설정 — Coming Soon</div></div>
+            </div>
+          </section>
+
+          <section class="char-panel" data-char-panel="amelia">
+            <div class="sectabs" role="tablist" aria-label="아멜리아 섹션">
+              <button class="sectab is-active" data-sec="illust" type="button">일러스트</button>
+              <button class="sectab" data-sec="art" type="button">원화</button>
+              <button class="sectab" data-sec="bg" type="button">배경 설정</button>
+            </div>
+            <div class="secstage">
+              <div class="secpanel is-active" data-sec-panel="illust"><div class="placeholder small">아멜리아 일러스트 — Coming Soon</div></div>
+              <div class="secpanel" data-sec-panel="art"><div class="placeholder small">아멜리아 원화 — Coming Soon</div></div>
+              <div class="secpanel" data-sec-panel="bg"><div class="placeholder small">아멜리아 배경 설정 — Coming Soon</div></div>
+            </div>
+          </section>
+
+          <section class="char-panel" data-char-panel="dungeon">
+            <div class="sectabs" role="tablist" aria-label="던전 속 위험 섹션">
+              <button class="sectab is-active" data-sec="sprite" type="button">인게임 스프라이트</button>
+              <button class="sectab" data-sec="process" type="button">작업 과정</button>
+            </div>
+            <div class="secstage">
+              <div class="secpanel is-active" data-sec-panel="sprite"><div class="placeholder small">던전 속 위험 — 인게임 스프라이트 — Coming Soon</div></div>
+              <div class="secpanel" data-sec-panel="process"><div class="placeholder small">던전 속 위험 — 작업 과정 — Coming Soon</div></div>
+            </div>
+          </section>
+        </div>
       </article>
 
       <article class="panel" data-panel="world">
@@ -205,6 +344,34 @@
 
       tabs.forEach(function (t) {
         t.addEventListener('click', function () { show(t.dataset.target); });
+      });
+
+      // 캐릭터 서브탭 (마리나 / 이오 / 아멜리아 / 던전 속 위험)
+      document.querySelectorAll('[data-char]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var key = btn.dataset.char;
+          var scope = btn.closest('[data-panel="character"]');
+          scope.querySelectorAll('[data-char]').forEach(function (t) {
+            t.classList.toggle('is-active', t.dataset.char === key);
+          });
+          scope.querySelectorAll('[data-char-panel]').forEach(function (p) {
+            p.classList.toggle('is-active', p.dataset.charPanel === key);
+          });
+        });
+      });
+
+      // 캐릭터별 세부 섹션탭 (일러스트 / 원화 / ...)
+      document.querySelectorAll('[data-sec]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var key = btn.dataset.sec;
+          var scope = btn.closest('[data-char-panel]');
+          scope.querySelectorAll('[data-sec]').forEach(function (t) {
+            t.classList.toggle('is-active', t.dataset.sec === key);
+          });
+          scope.querySelectorAll('[data-sec-panel]').forEach(function (p) {
+            p.classList.toggle('is-active', p.dataset.secPanel === key);
+          });
+        });
       });
 
       function goHome() { show('teaser'); }
